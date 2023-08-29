@@ -2,7 +2,7 @@ template <class trem>
 class matriz{
 private:
 	int m, n;
-	trem* pont[];
+	trem** pont;
 	
 public:
 	matriz(){
@@ -12,10 +12,15 @@ public:
 	matriz(int i, int j){
 		m=i;
 		n=j;
-		pont = new trem[m][n];
+		pont=new trem *[m];
+	
+	/* Alocação dinâmica das colunas, a cada LINHA que existe */	
+	for(int i=0; i<m; i++){
+		pont[i] = new trem[n];
+		}
 	}
 	~matriz(){
-		delete pont;
+		//poit= new trem[0][0]; delete pont;
 	}
 	trem get(int i, int j){return pont[i][j];};
 	void set(int i, int j, trem x){pont[i][j]=x;};
