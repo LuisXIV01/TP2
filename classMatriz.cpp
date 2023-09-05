@@ -1,48 +1,70 @@
-template <class trem>
+template <class T>
 class matriz{
 private:
 	int m, n;
-	trem** pont;
+	T** pont;
 	
 public:
 	matriz(){
 		n=m=0;
-		pont = new trem[0][0];
+		pont = new T[0][0];
 	}
 	matriz(int i, int j){
 		m=i;
 		n=j;
-		pont=new trem *[m];
+		pont = new T *[m];
 	
-	/* Alocação dinâmica das colunas, a cada LINHA que existe */	
+	// Alocação dinâmica das colunas, a cada LINHA que existe	
 	for(int i=0; i<m; i++){
-		pont[i] = new trem[n];
+		pont[i] = new T[n];
 		}
 	}
 	~matriz(){
-		//poit= new trem[0][0]; delete pont;
+		//poit= new T[0][0]; delete pont;
 	}
-	trem get(int i, int j){return pont[i][j];};
-	void set(int i, int j, trem x){pont[i][j]=x;};
+	T get(int i, int j){return pont[i][j];}
 	
-	bool operator ==(matriz<trem> mt){
-		bool ok=true;
+	void set(int i, int j, T x){pont[i][j]=x;}
+	
+	void operator =(matriz<T> mt){
 		for(int i=0; i<m; i++){
 			for(int j=0; j<n; j++){
-				if(pont[i][j]!=mt.pont[i][j]){
-					ok=false;
-				}
+				pont[i][j] = mt.pont[i][j];
 			}
 		}
 	}
 	
-	matriz operator+ (matriz<trem> mt){
+	matriz operator + (matriz<T> mt){
 		for(int i=0; i<m; i++){
 			for(int j=0; j<n; j++){
 				pont[i][j] += mt.pont[i][j];
 			}
 		}
-		return mt;
+		return this;;
+	}
+	matriz operator - (matriz<T> mt){
+		for(int i=0; i<m; i++){
+			for(int j=0; j<n; j++){
+				pont[i][j] -= mt.pont[i][j];
+			}
+		}
+		return this;
+	}
+	matriz operator * (matriz<T> mt){
+		for(int i=0; i<m; i++){
+			for(int j=0; j<n; j++){
+				pont[i][j] *= mt.pont[i][j];
+			}
+		}
+		return this;
+	}
+	matriz operator * (T x){
+		for(int i=0; i<m; i++){
+			for(int j=0; j<n; j++){
+				pont[i][j] *= x;
+			}
+		}
+		return this;
 	}
 };
 
