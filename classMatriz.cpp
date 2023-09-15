@@ -22,7 +22,9 @@ public:
 		}
 	}
 	~matriz(){
-		//poit= new T[0][0]; delete pont;
+		pont = new T*[1];
+		delete[] pont[0];
+		delete[] pont;
 	}
 	T get(int i, int j){return pont[i][j];}
 	int size(){
